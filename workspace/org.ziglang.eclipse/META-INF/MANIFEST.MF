@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Zig Plug-In for Eclipse
+Bundle-SymbolicName: org.ziglang.eclipse;singleton:=true
+Bundle-Version: 1.0.0
+Automatic-Module-Name: org.ziglang.eclipse
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.jdt.core,
+ org.eclipse.jface.text

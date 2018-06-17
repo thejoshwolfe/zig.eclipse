@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.navigate"
+            defaultHandler="org.ziglang.eclipse.ZigActionThing"
+            id="org.ziglang.eclipse.command1"
+            name="Zig Action Thing">
+      </command>
+   </extension>
+   <extension point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.ziglang.eclipse.command1"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+Z">
+      </key>
+   </extension>
+</plugin>
