@@ -2,40 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.commands">
-      <command
-            categoryId="org.eclipse.ui.category.navigate"
-            defaultHandler="org.ziglang.eclipse.ZigActionThing"
-            id="org.ziglang.eclipse.command1"
-            name="Zig Action Thing">
-      </command>
-   </extension>
-   <extension point="org.eclipse.ui.bindings">
-      <key
-            commandId="org.ziglang.eclipse.command1"
-            contextId="org.eclipse.ui.contexts.window"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+M2+Z">
-      </key>
-   </extension>
-   <extension id="coolbuilder" name="Zig Builder" point="org.eclipse.core.resources.builders">
-      <builder hasNature="true">
-         <run class="org.ziglang.eclipse.Builder">
-            <parameter name="optimize" value="true"/>
-            <parameter name="comment" value="Produced by the Cool Builder"/>
-         </run>
-      </builder>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="org.ziglang.eclipse.PerspectiveFactory"
-            icon="icons/zig16.png"
-            id="org.ziglang.eclipse.perspective"
-            name="Zig">
-      </perspective>
-   </extension>
-   <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
             file-extensions="zig"
@@ -48,7 +14,7 @@
          point="org.eclipse.ui.editors">
       <editor
             class="org.ziglang.eclipse.ZigEditor"
-            contributorClass="org.ziglang.eclipse.ZigEditorActionBarContributor"
+            contributorClass="org.eclipse.ui.part.EditorActionBarContributor"
             default="false"
             extensions="zig"
             icon="icons/zig16.png"
