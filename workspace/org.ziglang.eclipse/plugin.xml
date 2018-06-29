@@ -37,4 +37,11 @@
             name="Zig">
       </category>
    </extension>
+   <extension
+         point="org.eclipse.core.resources.builders"
+         id="zigbuilder">
+      <builder>
+         <run class="org.ziglang.eclipse.ZigProjectBuilder"/>
+      </builder>
+   </extension>
 </plugin>

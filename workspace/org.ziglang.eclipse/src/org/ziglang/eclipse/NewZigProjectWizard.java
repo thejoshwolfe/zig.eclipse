@@ -2,6 +2,7 @@ package org.ziglang.eclipse;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -117,10 +118,14 @@ public class NewZigProjectWizard extends Wizard implements INewWizard
     public boolean performFinish()
     {
         String projectName = projectLocation.getName();
+
         IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().newProjectDescription(projectName);
         projectDescription.setLocation(new Path(projectLocation.getPath()));
-        IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+        ICommand buildCommand = projectDescription.newCommand();
+        buildCommand.setBuilderName("org.ziglang.eclipse.zigbuilder");
+        projectDescription.setBuildSpec(new ICommand[] { buildCommand });
 
+        IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
         ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(getShell());
         try {
             progressMonitorDialog.run(true, true, new IRunnableWithProgress() {
