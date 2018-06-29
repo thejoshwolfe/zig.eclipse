@@ -1,7 +1,15 @@
 package org.ziglang.eclipse;
 
-import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
@@ -36,9 +44,6 @@ public class NewZigProjectWizard extends Wizard implements INewWizard
                 setPageComplete(false);
             }
             private Text fileTextbox;
-            private boolean buildCommandHasBeenEdited;
-            private Button buildFileOption;
-            private Text buildCommandTextbox;
 
             @Override
             public void createControl(Composite parent)
@@ -80,36 +85,6 @@ public class NewZigProjectWizard extends Wizard implements INewWizard
                     }
                 });
 
-                Group buildCommandGroup = new Group(rootComposite, SWT.NONE);
-                buildCommandGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-                buildCommandGroup.setText("Build command");
-                buildCommandGroup.setLayout(new GridLayout(2, false));
-
-                buildFileOption = new Button(buildCommandGroup, SWT.RADIO);
-                buildFileOption.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
-                buildFileOption.setText("Use build.zig");
-                buildFileOption.addSelectionListener(new SelectionAdapter() {
-                    @Override
-                    public void widgetSelected(SelectionEvent e)
-                    {
-                        buildCommandTextbox.setText("zig build --build-file=../build.zig");
-                    }
-                });
-
-                Button customBuildOption = new Button(buildCommandGroup, SWT.RADIO);
-                customBuildOption.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
-                customBuildOption.setText("Use custom command");
-
-                buildCommandTextbox = new Text(buildCommandGroup, SWT.BORDER);
-                buildCommandTextbox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-                buildCommandTextbox.addModifyListener(new ModifyListener() {
-                    @Override
-                    public void modifyText(ModifyEvent e)
-                    {
-                        buildCommandHasBeenEdited = true;
-                    }
-                });
-
                 setControl(rootComposite);
             }
 
@@ -120,18 +95,18 @@ public class NewZigProjectWizard extends Wizard implements INewWizard
             private boolean isValid()
             {
                 projectLocation = new java.io.File(fileTextbox.getText());
-                if (projectLocation.exists()) {
-                    if (!projectLocation.isDirectory())
-                        return false;
+                if (!projectLocation.isAbsolute())
+                    return false;
 
-                    if (!buildCommandHasBeenEdited) {
-                        String[] topLevelFiles = projectLocation.list();
-                        if (topLevelFiles != null && Arrays.asList(topLevelFiles).contains("build.zig")) {
-                            // assume the user wants to use build.zig
-                            buildFileOption.setSelection(true);
-                        }
-                    }
-                }
+                if (!projectLocation.isDirectory())
+                    return false;
+
+                String projectName = projectLocation.getName();
+                if (projectName.isEmpty())
+                    return false;
+
+                if (ResourcesPlugin.getWorkspace().getRoot().getProject(projectName).exists())
+                    return false;
 
                 return true;
             }
@@ -141,6 +116,32 @@ public class NewZigProjectWizard extends Wizard implements INewWizard
     @Override
     public boolean performFinish()
     {
-        return false;
+        String projectName = projectLocation.getName();
+        IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().newProjectDescription(projectName);
+        projectDescription.setLocation(new Path(projectLocation.getPath()));
+        IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+
+        ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(getShell());
+        try {
+            progressMonitorDialog.run(true, true, new IRunnableWithProgress() {
+                @Override
+                public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException
+                {
+                    try {
+                        project.create(projectDescription, monitor);
+                        project.open(monitor);
+                    } catch (CoreException e) {
+                        throw new InvocationTargetException(e);
+                    }
+                }
+            });
+        } catch (InvocationTargetException e) {
+            // idk what to do here
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        return true;
     }
 }
