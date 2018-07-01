@@ -8,9 +8,28 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.ui.console.AbstractConsole;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleView;
+import org.eclipse.ui.part.IPageBookViewPage;
 
 public class ZigProjectBuilder extends IncrementalProjectBuilder
 {
+    private static void initConsole()
+    {
+        // i think i have to do this to put the build output in the console tab
+        IConsole console = new AbstractConsole("Zig Build", null) {
+            @Override
+            public IPageBookViewPage createPage(IConsoleView view)
+            {
+                // TODO Auto-generated method stub
+                return null;
+            }
+        };
+        ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[] { console });
+    }
+
     @Override
     protected IProject[] build(int kind, Map<String, String> args, IProgressMonitor monitor) throws CoreException
     {
