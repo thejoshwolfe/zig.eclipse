@@ -22,26 +22,4 @@
             name="Zig Editor">
       </editor>
    </extension>
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <wizard
-            category="org.ziglang.eclipse.zigCategory"
-            class="org.ziglang.eclipse.NewZigProjectWizard"
-            icon="icons/zig16.png"
-            id="org.ziglang.eclipse.wizard1"
-            name="New Zig Project"
-            project="true">
-      </wizard>
-      <category
-            id="org.ziglang.eclipse.zigCategory"
-            name="Zig">
-      </category>
-   </extension>
-   <extension
-         point="org.eclipse.core.resources.builders"
-         id="zigbuilder">
-      <builder>
-         <run class="org.ziglang.eclipse.ZigProjectBuilder"/>
-      </builder>
-   </extension>
 </plugin>
