@@ -3,114 +3,66 @@ package org.ziglang.eclipse;
 public interface ZigKeywordDefs
 {
     public static final String[] KEYWORDS = { //
-            "const", //
-            "var", //
-            "extern", //
-            "packed", //
-            "export", //
-            "pub", //
-            "noalias", //
-            "inline", //
-            "comptime", //
-            "nakedcc", //
-            "stdcallcc", //
-            "volatile", //
             "align", //
-            "section", //
-            "struct", //
-            "enum", //
-            "union", //
-            "break", //
-            "return", //
-            "continue", //
+            "and", //
             "asm", //
-            "defer", //
-            "errdefer", //
-            "unreachable", //
-            "try", //
-            "catch", //
             "async", //
             "await", //
-            "suspend", //
-            "resume", //
+            "break", //
             "cancel", //
-            "if", //
+            "catch", //
+            "comptime", //
+            "const", //
+            "continue", //
+            "defer", //
             "else", //
-            "switch", //
-            "and", //
-            "or", //
-            "while", //
-            "for", //
+            "enum", //
+            "errdefer", //
+            "export", //
+            "extern", //
             "fn", //
-            "use", //
+            "for", //
+            "if", //
+            "inline", //
+            "nakedcc", //
+            "noalias", //
+            "or", //
+            "packed", //
+            "pub", //
+            "resume", //
+            "return", //
+            "section", //
+            "stdcallcc", //
+            "struct", //
+            "suspend", //
+            "switch", //
             "test", //
+            "try", //
+            "union", //
+            "unreachable", //
+            "use", //
+            "var", //
+            "volatile", //
+            "while", //
     };
     public static final String[] BUILTINS = { //
-            "null", //
-            "undefined", //
-            "this", //
-            "bool", //
-            "f32", //
-            "f64", //
-            "f128", //
-            "void", //
-            "noreturn", //
-            "type", //
-            "error", //
-            "promise", //
-            "i2", //
-            "u2", //
-            "i3", //
-            "u3", //
-            "i4", //
-            "u4", //
-            "i5", //
-            "u5", //
-            "i6", //
-            "u6", //
-            "i7", //
-            "u7", //
-            "i8", //
-            "u8", //
-            "i16", //
-            "u16", //
-            "u29", //
-            "i29", //
-            "i32", //
-            "u32", //
-            "i64", //
-            "u64", //
-            "i128", //
-            "u128", //
-            "isize", //
-            "usize", //
-            "c_short", //
-            "c_ushort", //
-            "c_int", //
-            "c_uint", //
-            "c_long", //
-            "c_ulong", //
-            "c_longlong", //
-            "c_ulonglong", //
-            "c_longdouble", //
-            "c_void", //
-            "true", //
-            "false", //
-            "@addWithOverflow", //
             "@ArgType", //
-            "@atomicLoad", //
-            "@bitCast", //
-            "@breakpoint", //
+            "@IntType", //
+            "@OpaqueType", //
+            "@TagType", //
+            "@addWithOverflow", //
             "@alignCast", //
             "@alignOf", //
+            "@atomicRmw", //
+            "@bitCast", //
+            "@breakpoint", //
             "@cDefine", //
             "@cImport", //
             "@cInclude", //
             "@cUndef", //
             "@canImplicitCast", //
             "@clz", //
-            "@cmpxchgWeak", //
-            "@cmpxchgStrong", //
+            "@cmpxchg", //
             "@compileError", //
             "@compileLog", //
             "@ctz", //
@@ -118,18 +70,15 @@ public interface ZigKeywordDefs
             "@divFloor", //
             "@divTrunc", //
             "@embedFile", //
-            "@export", //
-            "@tagName", //
-            "@TagType", //
             "@errorName", //
             "@errorReturnTrace", //
+            "@export", //
             "@fence", //
             "@fieldParentPtr", //
             "@frameAddress", //
             "@import", //
             "@inlineCall", //
             "@intToPtr", //
-            "@IntType", //
             "@maxValue", //
             "@memberCount", //
             "@memberName", //
@@ -141,28 +90,76 @@ public interface ZigKeywordDefs
             "@mulWithOverflow", //
             "@noInlineCall", //
             "@offsetOf", //
-            "@OpaqueType", //
             "@panic", //
             "@ptrCast", //
             "@ptrToInt", //
             "@rem", //
             "@returnAddress", //
             "@setCold", //
-            "@setRuntimeSafety", //
             "@setEvalBranchQuota", //
             "@setFloatMode", //
             "@setGlobalLinkage", //
             "@setGlobalSection", //
+            "@setRuntimeSafety", //
             "@shlExact", //
             "@shlWithOverflow", //
             "@shrExact", //
             "@sizeOf", //
-            "@sqrt", //
             "@subWithOverflow", //
+            "@tagName", //
             "@truncate", //
             "@typeId", //
             "@typeName", //
             "@typeOf", //
-            "@atomicRmw", //
+            "bool", //
+            "c_int", //
+            "c_long", //
+            "c_longdouble", //
+            "c_longlong", //
+            "c_short", //
+            "c_uint", //
+            "c_ulong", //
+            "c_ulonglong", //
+            "c_ushort", //
+            "c_void", //
+            "error", //
+            "f128", //
+            "f32", //
+            "f64", //
+            "false", //
+            "i128", //
+            "i16", //
+            "i2", //
+            "i29", //
+            "i3", //
+            "i32", //
+            "i4", //
+            "i5", //
+            "i6", //
+            "i64", //
+            "i7", //
+            "i8", //
+            "isize", //
+            "noreturn", //
+            "null", //
+            "promise", //
+            "this", //
+            "true", //
+            "type", //
+            "u128", //
+            "u16", //
+            "u2", //
+            "u29", //
+            "u3", //
+            "u32", //
+            "u4", //
+            "u5", //
+            "u6", //
+            "u64", //
+            "u7", //
+            "u8", //
+            "undefined", //
+            "usize", //
+            "void", //
     };
 }
