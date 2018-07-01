@@ -27,6 +27,7 @@ public interface ZigKeywordDefs
             "nakedcc", //
             "noalias", //
             "or", //
+            "orelse", //
             "packed", //
             "pub", //
             "resume", //
@@ -53,16 +54,20 @@ public interface ZigKeywordDefs
             "@addWithOverflow", //
             "@alignCast", //
             "@alignOf", //
+            "@atomicLoad", //
             "@atomicRmw", //
             "@bitCast", //
+            "@boolToInt", //
             "@breakpoint", //
+            "@bytesToSlice", //
             "@cDefine", //
             "@cImport", //
             "@cInclude", //
             "@cUndef", //
             "@canImplicitCast", //
             "@clz", //
-            "@cmpxchg", //
+            "@cmpxchgStrong", //
+            "@cmpxchgWeak", //
             "@compileError", //
             "@compileLog", //
             "@ctz", //
@@ -70,14 +75,24 @@ public interface ZigKeywordDefs
             "@divFloor", //
             "@divTrunc", //
             "@embedFile", //
+            "@enumToInt", //
+            "@errSetCast", //
             "@errorName", //
             "@errorReturnTrace", //
+            "@errorToInt", //
             "@export", //
             "@fence", //
+            "@field", //
             "@fieldParentPtr", //
+            "@floatCast", //
+            "@floatToInt", //
             "@frameAddress", //
             "@import", //
             "@inlineCall", //
+            "@intCast", //
+            "@intToEnum", //
+            "@intToError", //
+            "@intToFloat", //
             "@intToPtr", //
             "@maxValue", //
             "@memberCount", //
@@ -88,6 +103,7 @@ public interface ZigKeywordDefs
             "@minValue", //
             "@mod", //
             "@mulWithOverflow", //
+            "@newStackCall", //
             "@noInlineCall", //
             "@offsetOf", //
             "@panic", //
@@ -105,10 +121,13 @@ public interface ZigKeywordDefs
             "@shlWithOverflow", //
             "@shrExact", //
             "@sizeOf", //
+            "@sliceToBytes", //
+            "@sqrt", //
             "@subWithOverflow", //
             "@tagName", //
             "@truncate", //
             "@typeId", //
+            "@typeInfo", //
             "@typeName", //
             "@typeOf", //
             "bool", //
@@ -122,8 +141,11 @@ public interface ZigKeywordDefs
             "c_ulonglong", //
             "c_ushort", //
             "c_void", //
+            "comptime_float", //
+            "comptime_int", //
             "error", //
             "f128", //
+            "f16", //
             "f32", //
             "f64", //
             "false", //
