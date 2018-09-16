@@ -51,6 +51,7 @@ public interface ZigKeywordDefs
             "@IntType", //
             "@OpaqueType", //
             "@TagType", //
+            "@This", //
             "@addWithOverflow", //
             "@alignCast", //
             "@alignOf", //
@@ -87,6 +88,7 @@ public interface ZigKeywordDefs
             "@floatCast", //
             "@floatToInt", //
             "@frameAddress", //
+            "@handle", //
             "@import", //
             "@inlineCall", //
             "@intCast", //
@@ -107,10 +109,12 @@ public interface ZigKeywordDefs
             "@noInlineCall", //
             "@offsetOf", //
             "@panic", //
+            "@popCount", //
             "@ptrCast", //
             "@ptrToInt", //
             "@rem", //
             "@returnAddress", //
+            "@setAlignStack", //
             "@setCold", //
             "@setEvalBranchQuota", //
             "@setFloatMode", //
@@ -165,7 +169,6 @@ public interface ZigKeywordDefs
             "noreturn", //
             "null", //
             "promise", //
-            "this", //
             "true", //
             "type", //
             "u128", //
