@@ -1,6 +1,9 @@
 package org.ziglang.eclipse;
 
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
@@ -22,15 +25,15 @@ public class ZigEditor extends AbstractDecoratedTextEditor
                 presentationReconciler.setDamager(damagerRepairer, IDocument.DEFAULT_CONTENT_TYPE);
                 return presentationReconciler;
             }
-            //            @Override
-            //            public IContentAssistant getContentAssistant(ISourceViewer sv)
-            //            {
-            //                ContentAssistant ca = new ContentAssistant();
-            //                IContentAssistProcessor cap = new ZigCompletionProcessor();
-            //                ca.setContentAssistProcessor(cap, IDocument.DEFAULT_CONTENT_TYPE);
-            //                ca.setInformationControlCreator(getInformationControlCreator(sv));
-            //                return ca;
-            //            }
+            @Override
+            public IContentAssistant getContentAssistant(ISourceViewer sv)
+            {
+                ContentAssistant ca = new ContentAssistant();
+                IContentAssistProcessor cap = new ZigCompletionProcessor();
+                ca.setContentAssistProcessor(cap, IDocument.DEFAULT_CONTENT_TYPE);
+                ca.setInformationControlCreator(getInformationControlCreator(sv));
+                return ca;
+            }
             //            @Override
             //            public ITextHover getTextHover(ISourceViewer sv, String contentType)
             //            {

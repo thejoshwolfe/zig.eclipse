@@ -1,5 +1,7 @@
 package org.ziglang.eclipse;
 
+import java.util.regex.Pattern;
+
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IWhitespaceDetector;
@@ -31,21 +33,7 @@ public class ZigTokenizer extends RuleBasedScanner
 
     public ZigTokenizer()
     {
-        WordRule keywordRule = new WordRule(new IWordDetector() {
-            @Override
-            public boolean isWordStart(char c)
-            {
-                c -= '0';
-                if (c >= wordCharacterMap.length)
-                    return false;
-                return wordCharacterMap[c];
-            }
-            @Override
-            public boolean isWordPart(char c)
-            {
-                return isWordStart(c);
-            }
-        }, IDENTIFIER_TOKEN);
+        WordRule keywordRule = new WordRule(WORD_DETECTOR, IDENTIFIER_TOKEN);
 
         for (String text : ZigKeywordDefs.KEYWORDS) {
             keywordRule.addWord(text, KEYWORD_TOKEN);
@@ -71,81 +59,98 @@ public class ZigTokenizer extends RuleBasedScanner
         });
     }
 
-    private static boolean[] wordCharacterMap = { //
-            true, // '0'
-            true, // '1'
-            true, // '2'
-            true, // '3'
-            true, // '4'
-            true, // '5'
-            true, // '6'
-            true, // '7'
-            true, // '8'
-            true, // '9'
-            false, // ':'
-            false, // ';'
-            false, // '<'
-            false, // '='
-            false, // '>'
-            false, // '?'
-            true, // '@'
-            true, // 'A'
-            true, // 'B'
-            true, // 'C'
-            true, // 'D'
-            true, // 'E'
-            true, // 'F'
-            true, // 'G'
-            true, // 'H'
-            true, // 'I'
-            true, // 'J'
-            true, // 'K'
-            true, // 'L'
-            true, // 'M'
-            true, // 'N'
-            true, // 'O'
-            true, // 'P'
-            true, // 'Q'
-            true, // 'R'
-            true, // 'S'
-            true, // 'T'
-            true, // 'U'
-            true, // 'V'
-            true, // 'W'
-            true, // 'X'
-            true, // 'Y'
-            true, // 'Z'
-            false, // '['
-            false, // '\\'
-            false, // ']'
-            false, // '^'
-            true, // '_'
-            false, // '`'
-            true, // 'a'
-            true, // 'b'
-            true, // 'c'
-            true, // 'd'
-            true, // 'e'
-            true, // 'f'
-            true, // 'g'
-            true, // 'h'
-            true, // 'i'
-            true, // 'j'
-            true, // 'k'
-            true, // 'l'
-            true, // 'm'
-            true, // 'n'
-            true, // 'o'
-            true, // 'p'
-            true, // 'q'
-            true, // 'r'
-            true, // 's'
-            true, // 't'
-            true, // 'u'
-            true, // 'v'
-            true, // 'w'
-            true, // 'x'
-            true, // 'y'
-            true, // 'z'
+    // two equivalent representations
+    public static final Pattern WORD_PATTERN = Pattern.compile("[0-9A-Za-z_@]+");
+    public static final IWordDetector WORD_DETECTOR = new IWordDetector() {
+        private final boolean[] wordCharacterMap = { //
+                true, // '0'
+                true, // '1'
+                true, // '2'
+                true, // '3'
+                true, // '4'
+                true, // '5'
+                true, // '6'
+                true, // '7'
+                true, // '8'
+                true, // '9'
+                false, // ':'
+                false, // ';'
+                false, // '<'
+                false, // '='
+                false, // '>'
+                false, // '?'
+                true, // '@'
+                true, // 'A'
+                true, // 'B'
+                true, // 'C'
+                true, // 'D'
+                true, // 'E'
+                true, // 'F'
+                true, // 'G'
+                true, // 'H'
+                true, // 'I'
+                true, // 'J'
+                true, // 'K'
+                true, // 'L'
+                true, // 'M'
+                true, // 'N'
+                true, // 'O'
+                true, // 'P'
+                true, // 'Q'
+                true, // 'R'
+                true, // 'S'
+                true, // 'T'
+                true, // 'U'
+                true, // 'V'
+                true, // 'W'
+                true, // 'X'
+                true, // 'Y'
+                true, // 'Z'
+                false, // '['
+                false, // '\\'
+                false, // ']'
+                false, // '^'
+                true, // '_'
+                false, // '`'
+                true, // 'a'
+                true, // 'b'
+                true, // 'c'
+                true, // 'd'
+                true, // 'e'
+                true, // 'f'
+                true, // 'g'
+                true, // 'h'
+                true, // 'i'
+                true, // 'j'
+                true, // 'k'
+                true, // 'l'
+                true, // 'm'
+                true, // 'n'
+                true, // 'o'
+                true, // 'p'
+                true, // 'q'
+                true, // 'r'
+                true, // 's'
+                true, // 't'
+                true, // 'u'
+                true, // 'v'
+                true, // 'w'
+                true, // 'x'
+                true, // 'y'
+                true, // 'z'
+        };
+        @Override
+        public boolean isWordStart(char c)
+        {
+            return isWordPart(c);
+        }
+        @Override
+        public boolean isWordPart(char c)
+        {
+            c -= '0';
+            if (c >= wordCharacterMap.length)
+                return false;
+            return wordCharacterMap[c];
+        }
     };
 }
