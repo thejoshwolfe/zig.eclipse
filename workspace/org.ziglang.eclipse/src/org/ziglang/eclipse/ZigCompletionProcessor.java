@@ -77,7 +77,10 @@ public class ZigCompletionProcessor implements IContentAssistProcessor
             @Override
             public int compare(String a, String b)
             {
-                return popularityContest.get(b) - popularityContest.get(a);
+                int cmp = popularityContest.get(b) - popularityContest.get(a);
+                if (cmp != 0)
+                    return cmp;
+                return a.compareTo(b);
             }
         });
 
