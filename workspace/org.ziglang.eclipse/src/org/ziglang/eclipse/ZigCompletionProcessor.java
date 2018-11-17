@@ -66,6 +66,12 @@ public class ZigCompletionProcessor implements IContentAssistProcessor
             popularityContest.put(prefix, -1);
         }
 
+        // throw in the rest of the language words at low priority
+        for (String[] wordList : new String[][] { ZigKeywordDefs.KEYWORDS, ZigKeywordDefs.BUILTINS })
+            for (String word : wordList)
+                if (word.startsWith(prefix))
+                    popularityContest.putIfAbsent(word, 0);
+
         String[] words = popularityContest.keySet().toArray(new String[0]);
         Arrays.sort(words, new Comparator<String>() {
             @Override
@@ -76,7 +82,9 @@ public class ZigCompletionProcessor implements IContentAssistProcessor
         });
 
         ArrayList<ICompletionProposal> result = new ArrayList<>();
-        for (String word : words) {
+        int limit = Math.min(words.length, 100);
+        for (int i = 0; i < limit; i++) {
+            String word = words[i];
             result.add(new CompletionProposal(word, wordStart, prefix.length(), word.length()));
         }
         return result.toArray(new ICompletionProposal[0]);
