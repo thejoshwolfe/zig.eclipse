@@ -18,12 +18,14 @@ public interface ZigKeywordDefs
             "else", //
             "enum", //
             "errdefer", //
+            "error", //
             "export", //
             "extern", //
             "fn", //
             "for", //
             "if", //
             "inline", //
+            "linksection", //
             "nakedcc", //
             "noalias", //
             "or", //
@@ -32,7 +34,6 @@ public interface ZigKeywordDefs
             "pub", //
             "resume", //
             "return", //
-            "section", //
             "stdcallcc", //
             "struct", //
             "suspend", //
@@ -58,8 +59,10 @@ public interface ZigKeywordDefs
             "@atomicLoad", //
             "@atomicRmw", //
             "@bitCast", //
+            "@bitOffsetOf", //
             "@boolToInt", //
             "@breakpoint", //
+            "@byteOffsetOf", //
             "@bytesToSlice", //
             "@cDefine", //
             "@cImport", //
@@ -107,7 +110,6 @@ public interface ZigKeywordDefs
             "@mulWithOverflow", //
             "@newStackCall", //
             "@noInlineCall", //
-            "@offsetOf", //
             "@panic", //
             "@popCount", //
             "@ptrCast", //
@@ -134,6 +136,7 @@ public interface ZigKeywordDefs
             "@typeInfo", //
             "@typeName", //
             "@typeOf", //
+            "anyerror", //
             "bool", //
             "c_int", //
             "c_long", //
@@ -147,42 +150,19 @@ public interface ZigKeywordDefs
             "c_void", //
             "comptime_float", //
             "comptime_int", //
-            "error", //
             "f128", //
             "f16", //
             "f32", //
             "f64", //
             "false", //
-            "i128", //
-            "i16", //
-            "i2", //
-            "i29", //
-            "i3", //
-            "i32", //
-            "i4", //
-            "i5", //
-            "i6", //
-            "i64", //
-            "i7", //
-            "i8", //
+            "i0", //
             "isize", //
             "noreturn", //
             "null", //
             "promise", //
             "true", //
             "type", //
-            "u128", //
-            "u16", //
-            "u2", //
-            "u29", //
-            "u3", //
-            "u32", //
-            "u4", //
-            "u5", //
-            "u6", //
-            "u64", //
-            "u7", //
-            "u8", //
+            "u0", //
             "undefined", //
             "usize", //
             "void", //
