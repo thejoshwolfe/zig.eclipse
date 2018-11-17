@@ -28,7 +28,6 @@ public class ZigCompletionProcessor implements IContentAssistProcessor
         }
 
         IDocument document = viewer.getDocument();
-        // just give me everything
         String entireDocument;
         try {
             entireDocument = document.get(0, document.getLength());
@@ -37,6 +36,7 @@ public class ZigCompletionProcessor implements IContentAssistProcessor
             throw new RuntimeException(e);
         }
 
+        // find the start of the word the cursor is in
         int wordStart = offset;
         while (wordStart > 0) {
             char c = entireDocument.charAt(wordStart - 1);
@@ -48,7 +48,6 @@ public class ZigCompletionProcessor implements IContentAssistProcessor
 
         HashMap<String, Integer> popularityContest = new HashMap<>();
 
-        // this should probably be cached...
         Matcher wordMatcher = ZigTokenizer.WORD_PATTERN.matcher(entireDocument);
         while (wordMatcher.find()) {
             if (wordMatcher.start() == wordStart) {
@@ -96,18 +95,17 @@ public class ZigCompletionProcessor implements IContentAssistProcessor
     @Override
     public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset)
     {
-        return new IContextInformation[0];
+        return null;
     }
-
     @Override
     public char[] getCompletionProposalAutoActivationCharacters()
     {
-        return new char[0];
+        return null;
     }
     @Override
     public char[] getContextInformationAutoActivationCharacters()
     {
-        return new char[0];
+        return null;
     }
     @Override
     public String getErrorMessage()
