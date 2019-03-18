@@ -39,6 +39,7 @@ public interface ZigKeywordDefs
             "suspend", //
             "switch", //
             "test", //
+            "threadlocal", //
             "try", //
             "union", //
             "unreachable", //
@@ -53,6 +54,7 @@ public interface ZigKeywordDefs
             "@OpaqueType", //
             "@TagType", //
             "@This", //
+            "@Vector", //
             "@addWithOverflow", //
             "@alignCast", //
             "@alignOf", //
@@ -60,8 +62,10 @@ public interface ZigKeywordDefs
             "@atomicRmw", //
             "@bitCast", //
             "@bitOffsetOf", //
+            "@bitreverse", //
             "@boolToInt", //
             "@breakpoint", //
+            "@bswap", //
             "@byteOffsetOf", //
             "@bytesToSlice", //
             "@cDefine", //
