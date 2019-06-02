@@ -4,6 +4,7 @@ public interface ZigKeywordDefs
 {
     public static final String[] KEYWORDS = { //
             "align", //
+            "allowzero", //
             "and", //
             "asm", //
             "async", //
@@ -43,7 +44,7 @@ public interface ZigKeywordDefs
             "try", //
             "union", //
             "unreachable", //
-            "use", //
+            "usingnamespace", //
             "var", //
             "volatile", //
             "while", //
@@ -96,6 +97,7 @@ public interface ZigKeywordDefs
             "@floatToInt", //
             "@frameAddress", //
             "@handle", //
+            "@hasDecl", //
             "@import", //
             "@inlineCall", //
             "@intCast", //
